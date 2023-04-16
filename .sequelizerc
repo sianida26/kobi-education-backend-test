@@ -1,14 +1,8 @@
-const path = require('path');
-// require('dotenv').config();
-
-const MODELS_DIR = path.join(__dirname, 'src/database/models');
-const CONFIG_DIR = path.join(__dirname, 'src/database');
-const MIGRATIONS_DIR = path.join(__dirname, 'src/database/migrations');
-const SEEDERS_DIR = path.join(__dirname, 'src/database/seeders');
+const { resolve } = require('path');
 
 module.exports = {
-  config: path.join(CONFIG_DIR, 'config.ts'),
-  'models-path': path.join(MODELS_DIR),
-  'migrations-path': path.join(MIGRATIONS_DIR),
-  'seeders-path': path.join(SEEDERS_DIR),
+    config: resolve('dist/src/database/config.js'),
+    'seeders-path': resolve('dist/src/database/seeders'),
+    'migrations-path': resolve('dist/src/database/migrations'),
+    'models-path': resolve('application/models')
 };

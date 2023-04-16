@@ -12,6 +12,7 @@ const sequelize = new Sequelize(
     host: dbConfig.host,
     dialect:  dbConfig.dialect,
     logging: dbConfig.logging,
+    models: [__dirname + '/**/*.model.ts']
   },
 );
 
