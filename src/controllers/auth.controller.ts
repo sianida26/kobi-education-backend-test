@@ -72,10 +72,10 @@ export default class AuthController {
     
           // Send a success response with the JWT token
           res.json({ token });
-        } catch (error) {
+        } catch (error: any) {
           // Handle any unexpected errors
           console.error(error);
-          res.status(500).json({ error: 'Internal server error' });
+          res.status(500).json({ message: error.message });
         }
       }    
 }
