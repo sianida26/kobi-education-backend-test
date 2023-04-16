@@ -8,6 +8,7 @@ const questionService = new QuestionService()
 
 export default class PracticeController {
 
+    // Method to update answer belonging to a certain questionId
     async updateAnswer(req: Request, res: Response) {
         const validationSchema = yup.object({
             questionId: yup.number().required().max(12),
@@ -16,6 +17,8 @@ export default class PracticeController {
 
         try {
             const requestBody = req.body;
+
+            // Validate the body of incoming request against yup schema
             await validationSchema.validate(requestBody);
             await answerService.updateAnswer(req.user!, requestBody.questionId, requestBody.answer);
 
@@ -30,6 +33,7 @@ export default class PracticeController {
         }
     }
 
+    // Get all answers given by user
     async getAnswers(req: Request, res: Response) {
         try {
             const answers = await answerService.getUserAnswers(req.user!);
@@ -42,6 +46,7 @@ export default class PracticeController {
         }
     }
 
+    // Get all questions
     async getQuestions(req: Request, res: Response) {
         try {
             const questions = await questionService.getQuestions();
