@@ -19,9 +19,9 @@ module.exports = {
 					type: DataTypes.STRING,
 					allowNull: false,
 				},
-				answers: {
-					type: DataTypes.ARRAY(DataTypes.STRING),
-					allowNull: false,
+				options: {
+					type: DataTypes.STRING,
+					allowNull: true,
 				}
 			});
 		}),

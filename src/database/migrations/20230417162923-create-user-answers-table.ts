@@ -22,8 +22,14 @@ module.exports = {
 					}
 				},
 				questionId: {
-					allowNull: false,
 					type: DataTypes.INTEGER,
+					allowNull: false,
+					references: {
+						model: {
+							tableName: "Questions",
+						},
+						key: "id"
+					}
 				},
 				answer: {
 					allowNull: true,

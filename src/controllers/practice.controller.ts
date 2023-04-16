@@ -1,8 +1,10 @@
 import * as yup from 'yup';
 import { Request, Response } from "express";
 import AnswerService from "../services/answer.service";
+import QuestionService from "../services/question.service";
 
 const answerService = new AnswerService()
+const questionService = new QuestionService()
 
 export default class PracticeController {
 
@@ -39,4 +41,15 @@ export default class PracticeController {
             })
         }
     }
+
+    async getQuestions(req: Request, res: Response) {
+        try {
+            const questions = await questionService.getQuestions();
+            return res.json(questions);
+        } catch(e: any) {
+            res.status(500).json({
+                message: e.message,
+            })
+        }
+    }    
 }

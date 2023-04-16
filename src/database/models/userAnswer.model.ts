@@ -1,6 +1,7 @@
 import { Optional } from "sequelize"
 import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import User from "./user.model"
+import Question from "./question.model"
 
 interface UserAnswerAttributes {
     id: number;
@@ -19,18 +20,22 @@ export default class UserAnswer extends Model<UserAnswerAttributes, UserAnswerCr
 
     @PrimaryKey
     @Column
-    id!: number;
+    declare id: number;
 
     @ForeignKey(() => User)
     @Column
-    userId!: number;
+    declare userId: number;
+
+    @ForeignKey(() => Question)
+    @Column
+    declare questionId: number;
 
     @BelongsTo(() => User)
-    user!: User;
+    declare user: User;
+
+    @BelongsTo(() => Question)
+    declare question: Question;
 
     @Column
-    questionId!: number;
-
-    @Column
-    answer!: string;
+    declare answer: string;
 }

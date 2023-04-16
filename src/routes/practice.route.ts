@@ -7,6 +7,7 @@ const practiceController = new PracticeController();
 
 router.use(authMiddleware);
 
+router.get("/getQuestions", practiceController.getQuestions)
 router.post("/updateAnswer", practiceController.updateAnswer)
 router.get("/answers", practiceController.getAnswers)
 
