@@ -1,6 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
 import config from './config';
 
+import User from "./models/user.model";
+import UserAnswer from "./models/userAnswer.model";
+
 const env = (process.env.NODE_ENV as "development" | "production" | "test") || 'development';
 const dbConfig = config[env];
 
@@ -12,7 +15,7 @@ const sequelize = new Sequelize(
     host: dbConfig.host,
     dialect:  dbConfig.dialect,
     logging: dbConfig.logging,
-    models: [__dirname + '/**/*.model.ts']
+    models: [User, UserAnswer]
   },
 );
 

@@ -1,16 +1,30 @@
-import { Table, Column, Model, HasMany } from 'sequelize-typescript';
+import { Optional } from "sequelize"
+import { Table, Column, Model, PrimaryKey, HasMany } from 'sequelize-typescript';
+import UserAnswer from "./userAnswer.model";
 
-@Table
-export default class User extends Model {
+interface UserAttributes {
+    id: number;
+    username: string;
+    password: string;
+}
+
+interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
+
+@Table({
+    timestamps: false
+})
+export default class User extends Model<UserAttributes, UserCreationAttributes> {
+
+    @PrimaryKey
+    @Column
+    id!: number;
 
     @Column
-    id: number = -1;
+    username!: string;
 
     @Column
-    username: string = "";
+    password!: string;
 
-    @Column
-    password: string = "";
-
-    
+    @HasMany(() => UserAnswer)
+    answers!: UserAnswer[];
 }

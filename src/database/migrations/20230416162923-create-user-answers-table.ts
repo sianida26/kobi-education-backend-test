@@ -3,7 +3,7 @@ import { QueryInterface, DataTypes, QueryTypes } from "sequelize";
 module.exports = {
 	up: (queryInterface: QueryInterface): Promise<void> =>
 		queryInterface.sequelize.transaction(async (transaction) => {
-			await queryInterface.createTable("Users", {
+			await queryInterface.createTable("UserAnswers", {
 				id: {
 					allowNull: false,
 					autoIncrement: true,
@@ -11,17 +11,27 @@ module.exports = {
 					type: DataTypes.INTEGER,
 					unique: true,
 				},
-				username: {
+				userId: {
+					type: DataTypes.INTEGER,
 					allowNull: false,
-					type: DataTypes.STRING,
+					references: {
+						model: {
+							tableName: "Users",
+						},
+						key: "id"
+					}
 				},
-				password: {
+				questionId: {
 					allowNull: false,
-					type: DataTypes.STRING,
+					type: DataTypes.INTEGER,
 				},
+				answer: {
+					allowNull: true,
+					type: DataTypes.STRING,
+				}
 			});
 		}),
 
 	down: (queryInterface: QueryInterface): Promise<void> =>
-		queryInterface.dropTable("Users"),
+		queryInterface.dropTable("UserAnswers"),
 };
